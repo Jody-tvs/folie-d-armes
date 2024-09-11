@@ -26,7 +26,7 @@ class CategoryModel {
             return err 
         })
     }
-    
+
     //on créer une nouvelle catégorie
     static createCategory(data) {
         return db.query('INSERT INTO categories (name) VALUES (?)', [data.name])

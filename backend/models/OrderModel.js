@@ -109,4 +109,4 @@ class OrderModel {
                 orderdetails.orders_id = ?;
         `, [orderId])
     }
-}
+} 

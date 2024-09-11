@@ -18,7 +18,6 @@ class ContactModel {
         });
     }
 
-
     //récupérer tous les contacts
     static getAllContacts() {
         return db.query("SELECT * FROM contacts")
