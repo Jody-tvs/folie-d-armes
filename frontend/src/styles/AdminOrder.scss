@@ -1,0 +1,180 @@
+.order-management-container {
+    padding: 1rem;
+    margin: 0 auto;
+    background-color: #e0c893;
+  
+    h2 {
+      text-align: center;
+      font-size: 1.5rem; /* Taille ajustée pour mobile */
+      color: #4c6022;
+      margin-bottom: 1rem;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: auto;
+  
+      thead {
+        background-color: #faf3d0;
+        border-bottom: 2px solid #d9c9a8;
+  
+        th {
+          padding: 0.5rem;
+          text-align: left;
+          font-size: 0.85rem;
+          color: #4c6022;
+          white-space: nowrap; /* Empêche les retours à la ligne pour les titres */
+        }
+      }
+  
+      tbody {
+        tr {
+          &:nth-child(even) {
+            background-color: #EBD49D;
+          }
+  
+          &:hover {
+            background-color: #e4cf84;
+          }
+  
+          td {
+            padding: 0.5rem;
+            font-size: 0.8rem; /* Ajusté pour mobile */
+            border-bottom: 1px solid #d9c9a8;
+            vertical-align: middle;
+            word-wrap: break-word; /* Pour éviter que le texte déborde */
+          }
+  
+          /* Style des sélecteurs */
+          select {
+            width: 100%; /* Largeur complète sur mobile */
+            background-color: #996c38;
+            color: #fff;
+            border: none;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+  
+            &:hover {
+              background-color: #6e4d27;
+            }
+  
+            &:focus {
+              outline: none;
+            }
+          }
+  
+          /* Style des boutons */
+          button {
+            width: 100%; /* Largeur complète sur mobile */
+            background-color: #679c5c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 0.5rem; /* Espacement entre les boutons */
+            transition: background-color 0.3s ease;
+  
+            &:hover {
+              background-color: #3F6138;
+            }
+          }
+  
+          /* Conteneur des détails de commande */
+          .order-details {
+            padding: 1rem;
+            background-color: #f0e5bc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+            h4 {
+              font-size: 1rem;
+              margin-bottom: 0.5rem;
+              color: #4c6022;
+            }
+  
+            ul {
+              list-style: none;
+              padding: 0;
+  
+              li {
+                font-size: 0.8rem;
+                margin-bottom: 0.5rem;
+                color: #4c6022;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /* Media queries pour tablettes */
+  @media (min-width: 768px) {
+    .order-management-container {
+      table {
+        th, td {
+          font-size: 1rem; /* Ajustement pour les tablettes */
+          padding: 1rem;
+        }
+  
+        tbody tr td {
+          /* Les boutons et sélecteurs reprennent leur taille normale */
+          button, select {
+            width: auto; /* Revenir à la largeur automatique pour les plus grands écrans */
+            padding: 0.6rem 1.2rem;
+          }
+  
+          .order-details h4 {
+            font-size: 1.4rem;
+          }
+  
+          .order-details li {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Media queries pour desktop */
+  @media (min-width: 1024px) {
+    .order-management-container {
+      max-width: 80%; /* Limiter la largeur du contenu sur desktop */
+  
+      h2 {
+        font-size: 1.8rem; /* Augmentation de la taille du titre */
+      }
+      
+      table {
+        th, td {
+          font-size: 1.2rem;
+          padding: 1.2rem;
+        }
+  
+        tbody tr td {
+          /* Les boutons et sélecteurs reprennent leur taille normale sur desktop */
+          button, select {
+            padding: 0.7rem 1.5rem;
+          }
+  
+          .order-details {
+            padding: 1.5rem;
+  
+            h4 {
+              font-size: 1.6rem;
+            }
+  
+            li {
+              font-size: 1.1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -9,36 +9,32 @@ module.exports = (_db) => {
 
 class UserModel {
     
-    //sauvegarder un utilisateur dans la BDD
-    static saveOneUser(req) {
-        //On hash le mot de passe
-        return bcrypt.hash(req.body.password, saltRounds)
-        .then((hash) => {
-            //on insert les infos de l'utilisateur dans la BDD
-            return db.query(`INSERT INTO users (firstname, lastname, email, password, address, zip_code, city, phone, created_at) 
+    //sauvegarde un utilisateur dans la BDD
+    static async saveOneUser(req) {
+        try {
+            const hash = await bcrypt.hash(req.body.password, saltRounds)
+            const result = await db.query(`
+                INSERT INTO users (firstname, lastname, email, password, address, zip_code, city, phone, created_at) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
-            [
-                req.body.firstname,
-                req.body.lastname,
-                req.body.email,
-                hash,
-                req.body.address,
-                req.body.zip_code,
-                req.body.city,
-                req.body.phone,
-            ]
-        )
-            .then((res) => {
-                return res //retourne le resultat de la requete si c'est reussie
-            })
-            .catch((err) => {
-                return err //retourne l'erreur  en cas d'echec de la requete
-            })
-        })
-        .catch(err => err) //gère les erreurs lors du hashage du mdp
+                [
+                    req.body.firstname,
+                    req.body.lastname,
+                    req.body.email,
+                    hash,
+                    req.body.address,
+                    req.body.zip_code,
+                    req.body.city,
+                    req.body.phone,
+                ]
+            )
+            return result
+
+        } catch (err) {
+            throw err
+        }
     }
     
-    //recuperer un utilisateur en fonction de son email
+    //recupere un utilisateur en fonction de son email
     static getUserByEmail(req) {
         
         return db.query("SELECT * FROM users WHERE email = ?", [req.body.email])
@@ -50,7 +46,7 @@ class UserModel {
         })
     }
     
-    //recuperer un utilisateur en fonction de son ID
+    //recupere un utilisateur en fonction de son ID
     static findOneUser(id) {
         
         return db.query("SELECT * FROM users WHERE id =?", [id])
@@ -62,29 +58,43 @@ class UserModel {
         })
     }
     
-    //mettre à jour les infos d'un utilisateur
-    static updateUser(req, userId) {
-        
-        return db.query("UPDATE users SET firstName = ?, lastName = ?, address = ?, zip_code = ?, city = ?, phone = ? WHERE id = ?",
-        [
-            req.body.firstname,
-            req.body.lastname,
-            req.body.address,
-            req.body.zip_code,
-            req.body.city,
-            req.body.phone,
-           userId
-        ]
-    )
-    .then((res) => {
-        return res
-    })
-    .catch((err) => {
-        return err
-    })
+    //met à jour les infos d'un utilisateur
+    static updateUser(updates, userId) {
+        //vérifie si updates contient des champs à mettre à jour
+        const fields = Object.keys(updates)
+        if (fields.length === 0) {
+            return Promise.reject({ message: "Aucune donnée à mettre à jour" })
+        }
+    
+        const values = Object.values(updates)
+        values.push(userId) //ajout de l'ID utilisateur à la fin
+    
+        //requête SQL dynamique
+        const setString = fields.map(field => `${field} = ?`).join(', ')
+        const query = `UPDATE users SET ${setString} WHERE id = ?`
+
+        return db.query(query, values)
+            .then((res) => {
+                return res
+            })
+            .catch((err) => {
+                console.error("Erreur lors de la mise à jour de l'utilisateur :", err)
+                return { code: err.code, message: err.message }
+            })
+    }
+    
+    //modifie le mdp
+    static updateUserPassword(id, hashedPassword) {
+        return db.query("UPDATE users SET password = ? WHERE id = ?", [hashedPassword, id])
+        .then((res) => {
+            return res
+        })
+        .catch((err) => {
+            return err
+        })
 }
 
-    //mettre à jour la date de dernière connexion d'un utilisateur
+    //met à jour la date de dernière connexion d'un utilisateur
     static updateConnexion(id) {
         
         return db.query("UPDATE users SET created_at = NOW() WHERE id = ?", [id])
@@ -96,7 +106,7 @@ class UserModel {
         })
     }
     
-    //supprimer un compte utilisateur
+    //supprime un compte utilisateur
     static deleteOneUser (id) {
         return db.query("DELETE FROM users WHERE id = ?", [id])
         .then((res) => {

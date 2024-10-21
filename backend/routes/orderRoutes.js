@@ -1,4 +1,5 @@
 const withAuth = require('../middleware/withAuth')
+const isAdmin = require('../middleware/isAdmin')
 
 module.exports = (app, db) => {
     const ProductModel = require('../models/ProductModel')(db)
@@ -20,9 +21,18 @@ module.exports = (app, db) => {
 
     //route de récupération de toutes les commandes
     //route Postman ok
-    app.get('/api/v1/order/all', withAuth, orderController.getAllOrder)
+    app.get('/api/v1/order/all', withAuth, isAdmin, orderController.getAllOrder)
 
     //route de récupération d'une commande spécifique par son ID
     //route Postman ok
-    app.get('/api/v1/order/getOneOrder/:id', withAuth, orderController.getOneOrder)
+    app.get('/api/v1/order/getOneOrder/:id', withAuth, isAdmin, orderController.getOneOrder)
+
+    //route de mise à jour du statut de commande (en préparation ou expédié)
+    //route Postman ok
+    app.put('/api/v1/order/update-status/:id', withAuth, isAdmin, orderController.updateOrderStatus)
+
+    //route pour récupérer les commandes d'un utilisateur connecté
+    //route Postman ok
+    app.get('/api/v1/order/user/:userId', withAuth, orderController.getUserOrders)
+
 }

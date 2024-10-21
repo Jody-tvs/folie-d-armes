@@ -5,15 +5,15 @@ module.exports = {
     //créer un nouveau contact
     createContact: async (req, res) => {
         try {
-            console.log("Corps de la requête:", req.body)
             const newContact = await ContactModel.createContact(req)
-            res.json({status: 200, msg: "Contact créé avec succès", contact: newContact})
+            res.json({ status: 200, msg: "Contact créé avec succès", contact: newContact })
         } catch (err) {
-            res.json({status: 500, msg: "Oups, une erreur est survenue"})
+            console.error("Erreur lors de la création du contact:", err)
+            res.json({ status: 500, msg: "Oups, une erreur est survenue" })
         }
     },
-
-    //récupérer tous les contacts
+       
+    //récupère tous les contacts
     getAllContacts: async (req, res) => {
         try {
             const contacts = await ContactModel.getAllContacts()
@@ -23,7 +23,7 @@ module.exports = {
         }
     },
 
-    //récupérer un contact par son id
+    //récupère un contact par son id
     getContactById: async (req, res) => {
         try {
             const contact = await ContactModel.getContactById(req.params.id)
@@ -62,4 +62,4 @@ module.exports = {
             res.json({status: 500, msg: "Oups, une erreur est survenue"})
         }
     }
-};
+}

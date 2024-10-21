@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const path = require('path')
 
 const mysql = require("mysql2/promise")
 const cors = require ("cors")
@@ -7,7 +8,7 @@ const cors = require ("cors")
 //activation de cors pour permettre les requetes depuis d'autre domaines
 app.use(cors())
 
-//Uploads de fichiers
+//uploads de fichiers
 const fileUpload = require('express-fileupload')
 
 app.use(fileUpload({
@@ -19,7 +20,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 //défini le répertoir public pour les fichiers statique
-app.use(express.static(__dirname+ '/public'))
+app.use('/public', express.static(path.join(__dirname, 'public')))
 
 const dotenv = require("dotenv")
 dotenv.config()
@@ -43,7 +44,7 @@ mysql.createConnection({
     
     //garder la connexion active
     setInterval(async () => {
-        const res = await db.query("SELECT 1")
+      await db.query("SELECT 1")
     }, 10000)
     
     //routes de base pour vérifier que l'API fonctionne

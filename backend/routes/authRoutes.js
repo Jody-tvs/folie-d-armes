@@ -7,4 +7,5 @@ module.exports = (app, db) => {
     //route postman ok
     //route de vérification du token et de reconnexion automatique
     app.get('/api/v1/user/checkToken', withAuth, authController.checkToken)
+
 }

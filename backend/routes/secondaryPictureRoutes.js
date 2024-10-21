@@ -8,8 +8,13 @@ module.exports = (app, db) => {
 
     //requête SQL ok
     //route postman ok
-    //route pour ajouter une nouvelle image secondaire
-    app.post('/api/secondarypictures', secondaryPictureController.addSecondaryPicture)
+    // Route pour obtenir les images secondaires d'un produit spécifique
+    app.get('/api/secondarypictures/:productId', secondaryPictureController.getSecondaryPicturesByProductId)
+
+    //requête SQL ok
+    //route postman ok
+    //route pour ajouter une nouvelle image secondaire via son ID
+    app.post('/api/v1/product/:id/secondarypicture', secondaryPictureController.addSecondaryPicture)
 
     //requête SQL ok
     //route postman ok

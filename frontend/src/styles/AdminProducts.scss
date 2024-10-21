@@ -1,0 +1,157 @@
+.add-product-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #679c5c;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #3F6138;
+  }
+}
+.product-management-container {
+    padding: 40px 20px;
+    background-color: #dbc184;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 1200px;
+  
+    h2 {
+      font-size: 2.2rem;
+      color: #3f6138;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  
+    .add-product-link {
+      color: #3f6138;
+      background-color: #e6be6e;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #d6a145;
+      }
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+      th, td {
+        padding: 15px 20px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+  
+      th {
+        background-color: #3f6138;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+  
+      td {
+        font-size: 1rem;
+        color: #333;
+      }
+  
+      tr:nth-child(even) {
+        background-color: #f7f7f7;
+      }
+  
+      tr:hover {
+        background-color: #e0c893;
+      }
+    }
+  
+    .action-links {
+      display: flex;
+      gap: 10px;
+  
+      a, button {
+        padding: 8px 12px;
+        border-radius: 5px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s ease;
+        text-decoration: none;
+      }
+  
+      button.edit {
+        background-color: #679c5c;
+        &:hover {
+          background-color: #3F6138;
+        }
+      }
+  
+      button.delete {
+        background-color: #c2453c;
+        &:hover {
+          background-color: #9c1b19;
+        }
+      }
+    }
+  }
+  
+  /* Responsive Design */
+  
+  /* Tablette */
+  @media (min-width: 768px) {
+    .product-management-container {
+      padding: 60px 30px;
+    }
+  
+    table {
+      th, td {
+        padding: 20px;
+      }
+    }
+  
+    h2 {
+      font-size: 2.5rem;
+    }
+  }
+  
+  /* Ordinateur */
+  @media (min-width: 1024px) {
+    .product-management-container {
+      padding: 80px 40px;
+  
+      h2 {
+        font-size: 2.8rem;
+      }
+  
+      table {
+        th, td {
+          padding: 25px;
+        }
+  
+        th {
+          font-size: 1.3rem;
+        }
+  
+        td {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+  

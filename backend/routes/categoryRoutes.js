@@ -1,4 +1,5 @@
-const withAuthAdmin = require('../middleware/withAuthAdmin')
+const withAuth = require('../middleware/withAuth')
+const isAdmin = require('../middleware/isAdmin')
 
 module.exports = (app, db) => {
     const CategoryModel = require("../models/CategoryModel")(db)
@@ -17,15 +18,15 @@ module.exports = (app, db) => {
     //route pour créer une nouvelle catégorie
     //requête SQL ok
     //route Postman ok
-    app.post('/api/v1/categories', withAuthAdmin, categoryController.createCategory)
+    app.post('/api/v1/categories', withAuth, isAdmin, categoryController.createCategory)
 
     //route pour modifier une catégorie
     //requête SQL ok
     //route Postman ok
-    app.put('/api/v1/categories/:id', withAuthAdmin, categoryController.updateCategory)
+    app.put('/api/v1/categories/:id', withAuth, isAdmin, categoryController.updateCategory)
 
     //route pour supprimer une catégorie
     //requête SQL ok
     //route Postman ok
-    app.delete('/api/v1/categories/:id', withAuthAdmin, categoryController.deleteCategory)
+    app.delete('/api/v1/categories/:id', withAuth, isAdmin, categoryController.deleteCategory)
 }

@@ -1,91 +1,111 @@
 .home-container {
-    padding: 20px;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: linear-gradient(#f3e5ab, #748F66);
+}
+
+.carousel-container {
+  width: 100%;
+
+  img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 15px;
   }
-  
-  .home-header {
-    h1 {
+
+  //position des flèches
+  .carousel-control-prev,
+  .carousel-control-next {
+      width: 30px; 
+      height: 30px;
+      border-radius: 50%; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 50%;  
+      transform: translateY(-50%);  //assure les flèches centré
+      z-index: 1;  //flèches visibles au-dessus de l'image
+  }
+
+  .carousel-control-prev {
+      left: 10px; 
+  }
+
+  .carousel-control-next {
+      right: 10px;
+  }
+}
+
+.text-container {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #f3e5ab;
+  padding: 20px;
+  border-radius: 10px;
+
+  h2 {
       font-size: 1.5rem;
-    }
-    p {
-      font-size: 1rem;
-    }
+      margin-bottom: 15px;
   }
-  
-  .home-nav ul {
-    list-style: none;
-    padding: 0;
-  
-    li {
-      margin: 10px 0;
-    }
-  
-    a {
-      text-decoration: none;
-      color: #333;
+
+  p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+  }
+
+  strong {
       font-weight: bold;
-    }
   }
-  
-  .home-intro {
-    margin: 20px 0;
-  
-    h2 {
-      font-size: 1.25rem;
-    }
-    p {
-      font-size: 1rem;
-    }
+}
+
+//tablette
+@media screen and (min-width: 768px) {
+  .home-container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
   }
-  
-  .home-products {
-    h2 {
-      font-size: 1.25rem;
-      margin-bottom: 10px;
-    }
-  
-    .product-grid {
+
+  .carousel-container {
+      width: 50%;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-  
-      .product-card {
-        background: #f5f5f5;
-        padding: 10px;
-        border-radius: 8px;
-        text-align: center;
-  
-        img {
-          max-width: 100%;
-          height: auto;
-          border-radius: 8px;
-        }
-  
-        h3 {
-          font-size: 1.125rem;
-          margin: 10px 0;
-        }
-  
-        p {
-          font-size: 0.875rem;
-          color: #666;
-        }
-  
-        button {
-          background-color: #748f66;          ;
-          color: #fff;
-          padding: 10px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-        }
+
+      img {
+          height: 100%;
+          object-fit: contain;
       }
-    }
   }
-  
-  .home-footer {
-    margin-top: 30px;
-    font-size: 0.875rem;
-    background-color: #748f66;
+
+  .text-container {
+      width: 45%;
+      font-size: 1.1rem;
   }
-  
+}
+
+//ordinateur
+@media screen and (min-width: 1024px) {
+  .home-container {
+      padding: 40px;
+  }
+
+  .carousel-container {
+      width: 40%;
+      img {
+          height: 100%;
+      }
+  }
+
+  .text-container {
+      width: 55%;
+      font-size: 1.2rem;
+  }
+
+  h2 {
+      font-size: 2rem;
+  }
+}

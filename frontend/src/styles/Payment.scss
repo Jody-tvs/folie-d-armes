@@ -1,0 +1,107 @@
+.payment-page {
+    background-color: #E3D09A; 
+    padding: 20px;
+
+    h2 {
+        font-size: 1.5rem;
+        text-align: center;
+        color: #97A25E; 
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 1rem;
+        color: #000;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .StripeElement {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #97A25E;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0 8px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #45a049;
+            }
+
+            &:disabled {
+                background-color: lighten(#4CAF50, 20%);
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+//tablette
+@media (min-width: 768px) {
+    .payment-page {
+        padding: 40px;
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        form {
+            .StripeElement {
+                width: 80%;
+                font-size: 1.1rem;
+            }
+
+            button {
+                padding: 0 10px;
+                font-size: 1.4rem;
+            }
+        }
+    }
+}
+
+//ordinateur 
+@media (min-width: 1024px) {
+    .payment-page {
+        padding: 60px;
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        p {
+            font-size: 1.3rem;
+        }
+        
+        form {
+            .StripeElement {
+                width: 60%;
+                font-size: 1.2rem;
+            }
+
+            button {
+                padding: 0 13px;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

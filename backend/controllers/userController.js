@@ -3,156 +3,197 @@ const jwt = require("jsonwebtoken")
 const secret = 'fsjs38'
 
 module.exports = (UserModel) => {
-    //enregistrement d'un nouvel utilisateur
-    const saveUser = async(req, res) => {
-
+    //enregistre un nouvel utilisateur
+    const saveUser = async (req, res) => {
         try {
-            //on vérifie si un utilisateur avec cet email existe deja dans la BDD
+            const check = await UserModel.getUserByEmail(req)
+            if (check[0].length > 0) {
+                return res.status(409).json({ msg: "Cet email existe déjà" })
+            }
+    
+            const password = req.body.password
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+            if (!passwordRegex.test(password)) {
+                return res.status(400).json({
+                    msg: "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, un chiffre, et un caractère spécial."
+                })
+            }
+    
+            await UserModel.saveOneUser(req)
+    
+            //génère un token après l'enregistrement
+            const user = await UserModel.getUserByEmail(req) //récupère le nouvelle utilisateur créé
+            const payload = { id: user[0][0].id, role: user[0][0].role }
+            const token = jwt.sign(payload, process.env.JWT_SECRET || secret, { expiresIn: '1h' })
+    
+            return res.status(201).json({ 
+                msg: "L'utilisateur a bien été enregistré", 
+                token: token,
+                user: {
+                    id: user[0][0].id,
+                    firstname: user[0][0].firstname,
+                    lastname: user[0][0].lastname,
+                    email: user[0][0].email,
+                    address: user[0][0].address,
+                    zip_code: user[0][0].zip_code,
+                    city: user[0][0].city,
+                    phone: user[0][0].phone,
+                    role: user[0][0].role,
+                    isAdmin: user[0][0].role === "admin"
+                }
+            })
+        } catch (err) {
+            return res.status(500).json({ msg: "Erreur interne lors de l'enregistrement de l'utilisateur." })
+        }
+    }
+    
+
+    //connecte un utilisateur
+    const loginUser = async (req, res) => {
+        try {
             const check = await UserModel.getUserByEmail(req)
             if (check.code) {
-                //si une erreur survient lors de la vérif, on retourne une erreur serveur
-                res.json({ status: 500, msg: "Oups, une erreur est survenue " })
+                return res.status(500).json({ msg: "Erreur interne lors de la vérification de l'utilisateur." })
             }
-            else {
-                //Si un utilisateur avec cet email existe deja on retourne une erreur comme quoi l'email est deja utiliser
-                if (check[0].length > 0) {
-                    res.json({status: 500, msg: "cette email existe deja"})
-                }
-                else {
-                    //si aucun utilisateur existe avec cet email on enregistre le nouvelle utilisateur 
-                    const user = await UserModel.saveOneUser(req)
-                    if (user.code) {
-                        //si erreur lors de l'enregistrement on retourne une erreur serveur
-                        res.json({ status: 50, msg: "Oups, une erreur est survenue " })
-                    }
-                    else {
-                        //si tout est ok on confirme que l'utilisateur a été enregistrer
-                        res.json({ status: 200, msg: "L'utilisateur à bien été enregistré" })
-                    }
-                }
+            if (check[0].length === 0) {
+                return res.status(404).json({ msg: "Utilisateur introuvable." })
             }
-        }
-        catch (err) {
-            //on gere les erreurs générales
-            res.json({ status: 500, msg: "Oups, une erreur est survenue " })
+
+            const user = check[0][0]
+            const same = await bcrypt.compare(req.body.password, user.password)
+            if (!same) {
+                return res.status(401).json({ msg: "Mot de passe incorrect." })
+            }
+
+            const payload = { id: user.id, role: user.role }
+            const token = jwt.sign(payload, process.env.JWT_SECRET || secret, { expiresIn: '1h' })
+
+            const connect = await UserModel.updateConnexion(user.id)
+            if (connect.code) {
+                return res.status(500).json({ msg: "Erreur lors de la mise à jour de la date de dernière connexion." })
+            }
+
+            return res.status(200).json({
+                msg: "Connexion réussie",
+                token: token,
+                user: {
+                    id: user.id,
+                    firstname: user.firstname,
+                    lastname: user.lastname,
+                    email: user.email,
+                    address: user.address,
+                    zip_code: user.zip_code,
+                    city: user.city,
+                    phone: user.phone,
+                    role: user.role,
+                    isAdmin: user.role === "admin"
+                }
+            })
+        } catch (err) {
+            return res.status(500).json({ msg: "Erreur interne lors de la connexion." })
         }
     }
 
-    //methode pour connecter un utilisateur
-    const loginUser = async(req, res) => {
-
+    //met à jour les infos d'un utilisateur
+    const updateUser = async (req, res) => {
         try {
-            //on verifie si un utilisateur avec cet email existe dans la BDD
-            const check = await UserModel.getUserByEmail(req)
-            if (check.code) {
-                res.json({ status: 500, msg: "Oups, une erreur est survenue" })
-            }
-            else {
-                if (check.length === 0) {
-                    res.json({ status: 404, msg: "Utilisateur introuvable" })
+            const updates = {};
+            const allowedFields = ["email", "address", "city", "zip_code", "phone"]
+            
+            //on parcour les champs autorisés et les ajouter à updates si présents dans req.body
+            allowedFields.forEach(field => {
+                if (req.body[field]) {
+                    updates[field] = req.body[field];
                 }
-                else {
-                    //si utilisateur trouver on compare les mdp
-                    const same = await bcrypt.compare(req.body.password, check[0][0].password)
-                    if (same) {
-                        //si mdp correspondent on créer un token JWT avec les infos de l'utilisateur (pas d'infos sensible !)
-                        const payload = { id: check[0][0].id, role: check[0][0].role }
-                        const token = jwt.sign(payload, secret)
+            })
+    
+            if (Object.keys(updates).length === 0) {
+                return res.status(400).json({ msg: "Aucune donnée à mettre à jour." })
+            }
+            const userId = req.user.id
 
-                        //maj de la date de dernière connexion dans la BDD 
-                        const connect = await UserModel.updateConnexion(check[0][0].id)
-                        if (connect.code) {
-                            res.json({ status: 500, msg: "Oups, une erreur est survenue" })
-                        }
-                        else {
-                            //on renvoie le token JWT et les infos utilisateur au front
-                            const user = {
-                                id: check[0][0].id,
-                                firstname: check[0][0].firstname,
-                                lastname: check[0][0].lastname,
-                                email: check[0][0].email,
-                                address: check[0][0].address,
-                                zip_code: check[0][0].zip_code,
-                                city: check[0][0].city,
-                                phone: check[0][0].phone,
-                                role: check[0][0].role
-                            }
-                            res.json({ status: 200, token: token, user: user })
-                        }
-                    }
-                    else {
-                        //si mdp ne correspondent pas on retourne une erreur 
-                        res.json({ status: 404, msg: "Mot de passe incorrect" })
-                    }
-                }
-            }
-        }
-        catch (err) {
-            //on gère les erreurs générales
-            res.json({ status: 500, msg: "Oups, une erreur est survenue " })
-        }
-    }
-    //mettre à jour les infos d'un utilisateur
-    const updateUser = async(req, res) => {
-        try {
-            //maj des infos utilisateur dans la BDD
-            const user = await UserModel.updateUser(req, req.params.id)
+            //appel du modèle pour effectuer la maj
+            const user = await UserModel.updateUser(updates, userId)
             if (user.code) {
-                //si erreur de maj on retourne erreur serveur
-                res.json({ status: 500, msg: "Erreur lors de la mise à jour de l'utilisateur" })
+                return res.status(500).json({ msg: "Erreur lors de la mise à jour de l'utilisateur" })
             }
-            else {
-                //on recupère les infos mise à jour de l'utilisateur
-                const newUser = await UserModel.findOneUser(req.params.id)
-                if (newUser.code) {
-                    res.json({ status: 500, msg: "Oups, une erreur est survenue" })
-                }
-                else {
-                    //on renvoie les infos mis à jour de l'utilisateur au front
-                    const myUser = {
-                        id: newUser[0][0].id,
-                        firstname: newUser[0][0].firstname,
-                        lastname: newUser[0][0].lastname,
-                        email: newUser[0][0].email,
-                        address: newUser[0][0].address,
-                        zip_code: newUser[0][0].zip_code,
-                        city: newUser[0][0].city,
-                        phone: newUser[0][0].phone,
-                        role: newUser[0][0].role
-                    }
-                    res.json({ status: 200, msg: "Utilisateur modifié avec succès", newUser: myUser })
-                }
-            }
-        }
-        catch (err) {
-            res.json({ status: 500, msg: "Oups, une erreur est survenue" })
+    
+            res.status(200).json({ msg: "Utilisateur modifié avec succès" })
+    
+        } catch (err) {
+            res.status(500).json({ msg: "Oups, une erreur est survenue" })
         }
     }
 
-    //Méthode pour supprimer un utilisateur
-    const deleteUser = async(req, res) => {
+    //maj du mot de passe
+    const updatePassword = async (req, res) => {
         try {
-            //suppression d'un utilisateur dans la BDD
-            const deleteUser = await UserModel.deleteOneUser(req.params.id)
-            if (deleteUser.code) {
-                //si erreur lors de la suppression on retourne une erreur serveur
+            const { currentPassword, newPassword } = req.body
+            const userId = req.user?.id //on utilise l'ID de l'utilisateur à partir du token
+            if (!userId) {
+                return res.status(401).json({ msg: "Erreur : Utilisateur non authentifié." })
+            }
+            //récupère les infos utilisateur
+            const user = await UserModel.findOneUser(userId)
+            if (user[0].length === 0) {
+                return res.status(404).json({ msg: "Utilisateur introuvable." })
+            }
+
+            //vérifier le mdp actuel
+            const same = await bcrypt.compare(currentPassword, user[0][0].password)
+            if (!same) {
+                return res.status(401).json({ msg: "Mot de passe actuel incorrect." })
+            }
+
+            //hash du nouveau mdp
+            const hashedPassword = await bcrypt.hash(newPassword, 10)
+            
+            //maj du mot de passe
+            const result = await UserModel.updateUserPassword(userId, hashedPassword)
+            if (result.code) {
+                return res.status(500).json({ msg: "Erreur lors de la mise à jour du mot de passe." })
+            }
+
+            return res.status(200).json({ msg: "Mot de passe mis à jour avec succès." })
+        } catch (err) {
+            return res.status(500).json({ msg: "Oups, une erreur est survenue." })
+        }
+    }
+
+    //supprimer un utilisateur
+    const deleteUser = async (req, res) => {
+        try {
+            const deleteUser = await UserModel.deleteOneUser(req.user.id)
+            if (deleteUser.affectedRows > 0) {
+                res.json({ status: 200, msg: "Utilisateur supprimé avec succès" })
+            } else {
                 res.json({ status: 500, msg: "Oups, une erreur est survenue" })
             }
-            else {
-                //confirmation de la suppression
-                res.json({ status: 200, msg: " Utilisateur supprimé avec succès" })
-            }
-        }
-        catch (err) {
+        } catch (err) {
             res.json({ status: 500, msg: "Oups, une erreur est survenue" })
         }
     }
 
-    //on retourne les méthodes pour etre utilisées dans les routes 
+    //récupère profil utilisateur
+    const getUserProfile = async (req, res) => {
+        try {
+            const user = await UserModel.findOneUser(req.user.id)
+            if (!user || user.length === 0) {
+                return res.status(404).json({ msg: "Utilisateur non trouvé." })
+            }
+
+            res.status(200).json({ user: user[0] })
+        } catch (err) {
+            res.status(500).json({ msg: "Erreur lors de la récupération du profil utilisateur." })
+        }
+    }
+
     return {
         saveUser,
         loginUser,
         updateUser,
+        updatePassword,
+        getUserProfile,
         deleteUser
     }
 }

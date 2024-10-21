@@ -1,27 +1,37 @@
 const jwt = require("jsonwebtoken")
-const secret = "fsjs38"
+const secret = process.env.JWT_SECRET || "fsjs38"
 
 const withAuth = (req, res, next) => {
-    //on récupère notre token dans le header de la requête HTTP
-    const token = req.headers['x-access-token']
+    const authHeader = req.headers['authorization']
 
-    //si il ne le trouve pas
-    if (token === undefined) {
-        res.json({status: 404, msg: "Erreur, token introuvable" })
-    }else {
-        //sinon il a trouvé un token, utilisation de la fonction de vérification de jsonwebtoken
-        jwt.verify(token, secret, (err, decoded) => {
-            if (err) {
-                //si le token est invalide ou expirer
-                res.json({status: 401, msg: "Erreur, ton token est invalide"})
-            }else {
-               //on rajoute la propriété id dans l'objet req qui va nous permettre de récupérer les infos de l'utilisateur à reconnecter
-               req.id = decoded.id
-               //c'est ok on sort de la fonction on autorise l'accés à la callback de la route protégée
-               next()
-            }
-        })
+    //vérifi la présence de header authorization
+    if (!authHeader) {
+        return res.status(401).json({ msg: "Erreur, aucun token fourni. Accès refusé." })
     }
+
+    //extraction du token
+    const token = authHeader.startsWith("Bearer ") ? authHeader.split(' ')[1] : null
+
+    if (!token) {
+        return res.status(401).json({ msg: "Erreur, token introuvable. Accès refusé." })
+    }
+
+    //vérifi le token avec JWT
+    jwt.verify(token, secret, (err, decoded) => {
+        if (err) {
+            //gère l'erreur si le token est expiré ou invalide
+            return res.status(401).json({ msg: "Erreur, token invalide ou expiré." })
+        }
+
+        //on attache l'id et le rôle utilisateur décoder à la requête pour les futures utilisation
+        req.user = {
+            id: decoded.id,    
+            role: decoded.role, 
+        }
+
+        //passage à la prochaine étape de la requête
+        next()
+    })
 }
 
 module.exports = withAuth

@@ -1,26 +1,36 @@
-const withAuth = require('../middleware/withAuth') //importation du middleware pour la vérif de l'authentification
+const withAuth = require('../middleware/withAuth') 
 
 module.exports = (app, db) => {
-    const UserModel = require("../models/UserModel")(db) //initialisation du model utilisateur avec la BDD
-    const userController = require("../controllers/userController")(UserModel) //initialisation du controleur utilisateur avec le modele
+    const UserModel = require("../models/UserModel")(db) 
+    const userController = require("../controllers/userController")(UserModel)
     
-    //route d'enregistrement d'un utilisateur (créer un nouvelle utilisateur dans la BDD)
+    //route d'enregistrement d'un utilisateur créer un nouvelle utilisateur dans la bdd
     //requête SQL ok
     //route Postman ok
     app.post('/api/v1/user/register', userController.saveUser)
 
-    //route de connexion d'un utilisateur (sert à l'utilisateur de se connecter et génère un token qu'on envoie vers le front)
+    //route de connexion d'un utilisateur
     //requête SQL ok
     //route Postman ok
     app.post('/api/v1/user/login', userController.loginUser)
 
-    //route de modification  des infos utilisateur (route protéger par le middleware withAuth pour vérifier l'authentification)
+    //route de modification des infos utilisateur 
     //requête SQL ok
     //route Postman ok
-    app.put('/api/v1/user/update/:id', withAuth, userController.updateUser)
+    app.put('/api/v1/user/update', withAuth, userController.updateUser)
 
-    //route de suppression d'un utilisateur (route aussi protéger par withAuth qui assure qu'un seul utilisateur authentifier peut supprimer un compte)
+    //route de suppression d'un utilisateur
     //requête SQL ok
     //route Postman ok
-    app.delete('/api/v1/user/delete/:id', withAuth, userController.deleteUser)
+    app.delete('/api/v1/user/delete', withAuth, userController.deleteUser)
+
+    //requête SQL ok
+    //route Postman ok
+    //route de modification de mot de passe
+    app.put('/api/v1/user/update-password', withAuth, userController.updatePassword)
+
+    //route de récupération des infos du profil de l'utilisateur connecté
+    //requête SQL ok
+    //route Postman ok
+    app.get('/api/v1/user/profil', withAuth, userController.getUserProfile)
 }

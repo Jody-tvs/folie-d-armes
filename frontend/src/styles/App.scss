@@ -1,0 +1,74 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/fonts/Nunito-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body, p, a  {
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  color: #000;
+  line-height: 1.6;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+
+h1, h2, h3 {
+  font-family: 'Bangers', cursive;
+  color: #000;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 90px;
+  background: linear-gradient(#f3e5ab, #748F66); 
+}
+
+main {
+  flex-grow: 1; 
+}
+
+footer {
+  margin-top: auto;  
+  padding: 20px;
+  background-color: #3f6138;
+}
+
+.back-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+  }
+
+  //tablette
+  @media screen and (min-width: 768px) {
+    padding: 0 4px;
+    font-size: 18px;
+  }
+
+  //ordinateur
+  @media screen and (min-width: 1024px) {
+    padding: 0 3px;
+    font-size: 18px;
+  }
+}

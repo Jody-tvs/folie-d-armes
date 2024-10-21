@@ -1,34 +1,65 @@
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const secret = process.env.JWT_SECRET || "fsjs38"
+
 module.exports = (UserModel) => {
-    
-    //on vérifie la validité du token et récupère les infos de l'utilisateur
-    const checkToken = async (req, res) => {
+
+    //vérifie la validité du token
+   const checkToken = async (req, res) => {
+    try {
+        const user = await UserModel.findOneUser(req.id)
+        if (user.code || !user) { //vérifi si aucun utilisateur n'est trouver
+            return res.status(500).json({status: 500, msg: "Oups une erreur est survenue 1"})
+        } 
+
+        const myUser = {
+            id: user.id, 
+            firstName: user.firstname,
+            lastName: user.lastname,
+            email: user.email,
+            address: user.address,
+            zip_code: user.zip_code,
+            city: user.city,
+            phone: user.phone,
+            role: user.role,
+            isAdmin: user.role === "admin"
+        }
+
+        return res.status(200).json({status: 200, user: myUser})
+        
+    } catch (err) {
+        return res.status(500).json({status: 500, msg: "Oups, une erreur est survenue 2"})
+    }
+}
+
+    //connexion pour générer le token
+    const loginUser = async (req, res) => {
         try {
-            //on récup des infos de l'utilisateur dans la BDD en fonction de l'ID recup du token
-            const user = await UserModel.findOneUser(req.id)
-            if(user.code) {
-                //si une errreur survient lors de la récupération des infos de l'utilisateur
-                res.json({status: 500, msg: "Oups une erreur est survenue 1"})
-            }else {
-                //on créer un objet 'myUser' pour renvoyer seulement les infos nécessaire au front
-                const myUser = {
-                    id: user[0][0].id,
-                    firstName: user[0][0].firstname,
-                    lastName: user[0][0].lastname,
-                    email: user[0][0].email,
-                    address: user[0][0].address,
-                    zip_code: user[0][0].zip_code,
-                    city: user[0][0].city,
-                    phone: user[0][0].phone,
-                    role: user[0][0].role
-                }
-                res.json({status: 200, user: myUser}) //renvoi des infos de l'utilisateur au front pour une reco automatique
+            const user = await UserModel.findOneUserByEmail(req.body.email)
+
+            if (!user || user.length === 0) {
+                return res.status(404).json({ msg: 'Utilisateur non trouvé' })
             }
-        }catch (err) {
-            //gestion des erreurs (imprévue)
-            res.json({status: 500, msg: "Oups, une erreur est survenue 2"})
+
+            const isMatch = await bcrypt.compare(req.body.password, user[0].password)
+            if (!isMatch) {
+                return res.status(401).json({ msg: 'Mot de passe incorrect' })
+            }
+
+            const token = jwt.sign(
+                { id: user[0].id, role: user[0].role }, 
+                secret,
+                { expiresIn: '1h' } 
+            )
+
+            res.json({ token })
+        } catch (err) {
+            res.status(500).json({ msg: 'Erreur lors de la connexion' })
         }
     }
+
     return {
-        checkToken //on export checkToken pour l'utiliser dans nos routes
+        checkToken,
+        loginUser
     }
 }

@@ -5,17 +5,18 @@ module.exports = (_db) => {
 
 class ContactModel {
     //créer un nouveau contact
-        static createContact(req) {
+    static createContact(req) {
         return db.query(
-            "INSERT INTO contacts (email, subject, story, statut, receipt_date) VALUES (?, ?, ?, 0, NOW())", //le statut est à 0 (non lu)
+            "INSERT INTO contacts (email, subject, story, statut, receipt_date) VALUES (?, ?, ?, 0, NOW())",
             [req.body.email, req.body.subject, req.body.story]
         )
         .then((res) => {
             return res
         })
         .catch((err) => {
+            console.error("Erreur lors de l'insertion du contact:", err)
             return err
-        });
+        })
     }
 
     //récupérer tous les contacts

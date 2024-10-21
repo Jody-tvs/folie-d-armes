@@ -11,6 +11,17 @@ const getAllSecondaryPictures = async () => {
     }
 }
 
+//obtient toutes les images secondaires par product_id
+const getSecondaryPicturesByProductId = async (productId) => {
+    const sql = `SELECT * FROM secondarypictures WHERE products_id = ?`
+    try {
+        const [results] = await db.query(sql, [productId])
+        return results;
+    } catch (err) {
+        throw err
+    }
+}
+
 //ajoute une nouvelle image secondaire
 const addSecondaryPicture = async (data) => {
     const { name, alt, products_id } = data
@@ -39,5 +50,6 @@ const deleteSecondaryPicture = async (id) => {
 module.exports = {
     getAllSecondaryPictures,
     addSecondaryPicture,
-    deleteSecondaryPicture
+    deleteSecondaryPicture,
+    getSecondaryPicturesByProductId 
 }
