@@ -5,9 +5,12 @@ module.exports = {
     //créer un nouveau contact
     createContact: async (req, res) => {
         try {
+            //On appel la méthode createContact du modèle pour enregistrer un nouveau contact dans la bdd
             const newContact = await ContactModel.createContact(req)
+            //renvoi la réponse à l'utilisateur
             res.json({ status: 200, msg: "Contact créé avec succès", contact: newContact })
         } catch (err) {
+            //si il y a une erreur elle s'affiche dans la console
             console.error("Erreur lors de la création du contact:", err)
             res.json({ status: 500, msg: "Oups, une erreur est survenue" })
         }
@@ -16,6 +19,7 @@ module.exports = {
     //récupère tous les contacts
     getAllContacts: async (req, res) => {
         try {
+            //on écupère tous les contacts en appelant la méthode getAllContacts du modèle
             const contacts = await ContactModel.getAllContacts()
             res.json({status: 200, contacts})
         } catch (err) {

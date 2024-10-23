@@ -29,20 +29,21 @@ import Payment from './pages/user/Payment'
 import Success from './pages/Success'
 
 function App() {
-  const dispatch = useDispatch()
-  const { user } = useSelector((state) => state.auth)
+  const dispatch = useDispatch() //permet d'envoyer des actions à Redux
+  const { user } = useSelector((state) => state.auth) //sélectionne les infos de l'utilisateur dans le store Redux
 
+  //effet qui s'exécute après la connexion d'un utilisateur
   useEffect(() => {
     if (user) {
         //action à exécuter après la connexion de l'utilisateur
     }
-  }, [user, dispatch])
+  }, [user, dispatch]) //hook useEffect se déclenche à chaque fois que user ou dispatch change
 
   return (
-    <AuthProvider>
+    <AuthProvider> {/* fournit le contexte d'authentification à toute l'application */}
       <Router>
         <div className="app">
-          <Header /> 
+          <Header /> {/* affiche la barre de navigation */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

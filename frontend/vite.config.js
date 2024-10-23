@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+//exporte la configuration de Vite
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react()], //utilise le plugin react pour vite ce qui permet d'intégrer react dans le projet
   server: {
     port: 9000,
   },

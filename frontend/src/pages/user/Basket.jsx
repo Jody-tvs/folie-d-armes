@@ -5,20 +5,24 @@ import { useNavigate } from 'react-router-dom'
 import '../../styles/basket.scss'
 
 function Basket() {
-  const navigate = useNavigate()
-  const { basket, totalPrice } = useSelector((state) => state.basket)
-  const dispatch = useDispatch()
+  const navigate = useNavigate() //permet la navigation vers d'autres pages
+  const { basket, totalPrice } = useSelector((state) => state.basket) //récupère le contenu du panier et le prix total depuis le state redux
+  const dispatch = useDispatch() //useDispatch pour envoyer des actions à redux
 
+  //suppression d'un article du panier
   const handleRemoveItem = (itemId) => {
-    dispatch(removeFromBasket(itemId));
+    dispatch(removeFromBasket(itemId)) //dispatch de l'action removeFromBasket avec l'id de l'article à supprimer
   }
 
+  //gère le changement de quantité d'un article dans le panier
   const handleQuantityChange = (itemId, newQuantity) => {
+    //si la nouvelle quantité est supérieure à 0 on met à jour la quantité de l'article
     if (newQuantity > 0) {
-      dispatch(updateItemQuantity({ itemId, newQuantity }))
+      dispatch(updateItemQuantity({ itemId, newQuantity })) //dispatch de l'action updateItemQuantity avec l'id de l'article et la nouvelle quantité
     }
   }
 
+  //gérer le paiement
   const handlePayment = () => {
     //redirige vers la page de paiement
     navigate('/payment')
@@ -27,10 +31,12 @@ function Basket() {
   return (
     <div className="basket">
       <h1>Mon Panier</h1>
+      {/* si le panier est vide on affiche un message */}
       {basket.length === 0 ? (
         <p>Votre panier est vide.</p>
       ) : (
         <div>
+          {/* si le panier n'est pas vide on affiche les articles dans le panier */}
           {basket.map((item) => (
             <div key={item.id} className="basket-item">
               <img src={`http://localhost:9500/public/images/${item.picture}`} alt={item.alt} />

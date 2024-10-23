@@ -9,49 +9,53 @@ import logo from '/logo/logo.png'
 import '../styles/header.scss'
 
 function Header() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const navigate = useNavigate() //hook pour la navigation entre les pages
+  const dispatch = useDispatch() //hook pour envoyer des actions à redux
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false) //gère l'ouverture/fermeture du menu mobile
+  const [selectedCategory, setSelectedCategory] = useState('') //état pour la catégorie sélectionnée
 
   //utilise redux pour récupérer les articles du panier et l'état de l'utilisateur connecté
-  const cartItems = useSelector((state) => state.basket.basket)
-  const { isAuthenticated, isAdmin } = useSelector((state) => state.auth) 
+  const cartItems = useSelector((state) => state.basket.basket) //récupère des articles du panier
+  const { isAuthenticated, isAdmin } = useSelector((state) => state.auth) //récupère de l'état de connexion et du statut d'admin
   
 
   //gère la déconnexion
   const handleLogout = () => {
-    //déconnecte l'utilisateur et vide le panier
-    localStorage.removeItem('token')
-    dispatch(clearBasket()) //vide le panier dans redux
-    dispatch(logout()) //utilise l'action de déconnexion depuis redux
-    setIsMobileMenuOpen(false)
-    setSelectedCategory('')
-    navigate('/login')
+    //supprime le token de l'utilisateur pour le déconnecter
+    localStorage.removeItem('token') //suppression du token de localStorage
+    dispatch(clearBasket()) //vide le panier dans létat global redux
+    dispatch(logout()) //action pour déconnecter l'utilisateur dans redux
+    setIsMobileMenuOpen(false) //ferme le menu mobile
+    setSelectedCategory('') //réinitialise la catégorie sélectionner
+    navigate('/login') //redirige vers la page de connexion
   }
 
+  //gère le changement de catégorie dans le menu déroulant
   const handleCategoryChange = (e) => {
-    const selectedCategory = e.target.value
+    const selectedCategory = e.target.value //récupère la catégorie sélectionner
     if (selectedCategory) {
-      setSelectedCategory(selectedCategory)
-      navigate(`/${selectedCategory}`)
-      setIsMobileMenuOpen(false)
+      setSelectedCategory(selectedCategory) //met à jour l'état avec la catégorie choisie
+      navigate(`/${selectedCategory}`) //redirige vers la page correspondante à la catégorie
+      setIsMobileMenuOpen(false) //ferme le menu mobile
     }
   }
 
+  //gère l'ouverture/fermeture du menu mobile
   const handleMenuToggle = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
+    setIsMobileMenuOpen(!isMobileMenuOpen) //alterne entre ouvert et fermer
   }
 
+  //gère la réinitialisation de la catégorie sélectionner et ferme le menu mobile lors du clic sur un lien
   const handleLinkClick = () => {
-    setSelectedCategory('')
-    setIsMobileMenuOpen(false)
+    setSelectedCategory('') //réinitialise la catégorie
+    setIsMobileMenuOpen(false) //ferme le menu mobile
   }
 
   return (
     <header>
       <nav className="nav-bar">
         <div className="nav-logo">
+          {/* Lien pour revenir à la page d'accueil en cliquant sur le logo */}
           <Link to="/" onClick={handleLinkClick}>
             <img src={logo} alt="Logo Folie d'Armes" className="logo" />
           </Link>

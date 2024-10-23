@@ -18,14 +18,16 @@ module.exports = (UserModel) => {
                     msg: "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, un chiffre, et un caractère spécial."
                 })
             }
-    
+            
+            //créer un nouvel utilisateur
             await UserModel.saveOneUser(req)
     
-            //génère un token après l'enregistrement
-            const user = await UserModel.getUserByEmail(req) //récupère le nouvelle utilisateur créé
-            const payload = { id: user[0][0].id, role: user[0][0].role }
-            const token = jwt.sign(payload, process.env.JWT_SECRET || secret, { expiresIn: '1h' })
+            //génère un token JWT pour la connexion automatique
+            const user = await UserModel.getUserByEmail(req) //récupère le nouvelle utilisateur avec son email
+            const payload = { id: user[0][0].id, role: user[0][0].role } //objet payload qui contient les infos utilisateuts  (id et son role)
+            const token = jwt.sign(payload, process.env.JWT_SECRET || secret, { expiresIn: '1h' }) //token JWT avec les infos playload et clé secrete, le token expire au bout d'une heure
     
+            //envoi le token au client pour qu'il soit automatiquement connecté
             return res.status(201).json({ 
                 msg: "L'utilisateur a bien été enregistré", 
                 token: token,
@@ -47,7 +49,6 @@ module.exports = (UserModel) => {
         }
     }
     
-
     //connecte un utilisateur
     const loginUser = async (req, res) => {
         try {
