@@ -1,7 +1,7 @@
 module.exports = (_db) => {
     db = _db
     return ContactModel
-};
+}
 
 class ContactModel {
     //créer un nouveau contact

@@ -17,7 +17,7 @@ module.exports = {
     },
        
     //récupère tous les contacts
-    getAllContacts: async (req, res) => {
+    getAllContacts: async (_, res) => {
         try {
             //on écupère tous les contacts en appelant la méthode getAllContacts du modèle
             const contacts = await ContactModel.getAllContacts()

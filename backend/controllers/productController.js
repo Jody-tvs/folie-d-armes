@@ -17,7 +17,7 @@ module.exports = (ProductModel) => {
     const updateProduct = async (req, res) => {
         try {
             const product = await ProductModel.updateOneProduct(req, req.params.id)
-            res.json({ status: 200, msg: "Produit modifié avec succès" })
+            res.json({ status: 200, msg: "Produit modifié avec succès", product })
         } catch (err) {
             res.json({ status: 500, msg: "Oups une erreur est survenue" })
         }
