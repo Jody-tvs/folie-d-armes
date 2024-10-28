@@ -6,8 +6,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;  /* S'assurer que le footer prend toute la largeur */
-  margin-top: auto; /* Pousse le footer au bas de la page si le contenu est insuffisant */
+  width: 100%;  
+  margin-top: auto;
   
   .footer-column {
     margin-bottom: 20px;
@@ -33,13 +33,13 @@
   }
 }
 
-/* Style pour tablette */
+//tablette 
 @media (min-width: 768px) {
   .footer {
     flex-direction: row;
     justify-content: space-around;
     padding: 30px;
-    align-items: flex-start; /* Aligner les colonnes en haut */
+    align-items: flex-start; 
 
     .footer-column {
       margin-bottom: 0;
@@ -56,7 +56,7 @@
   }
 }
 
-/* Style pour ordinateur */
+//ordinateur 
 @media (min-width: 1024px) {
   .footer {
     padding: 40px 60px;

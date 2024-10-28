@@ -1,5 +1,5 @@
 .add-product-container {
-  max-width: 1000px; /* Largeur max pour le conteneur */
+  max-width: 1000px; 
   margin: 0 auto;
   padding: 20px;
   background-color: #f3f3f3;
@@ -21,8 +21,8 @@
 
   .add-product-form {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Deux colonnes égales */
-    gap: 20px; /* Espace entre les champs */
+    grid-template-columns: 1fr 1fr;
+    gap: 20px; 
 
     label {
       font-weight: bold;
@@ -42,12 +42,12 @@
     }
 
     textarea {
-      grid-column: span 2; /* Texte sur deux colonnes */
-      height: 100px; /* Hauteur spécifique pour les textarea */
+      grid-column: span 2;
+      height: 100px; 
     }
 
     button {
-      grid-column: span 2; /* Le bouton s'étend sur les deux colonnes */
+      grid-column: span 2; 
       background-color: #4a8b4e;
       color: white;
       padding: 10px;
@@ -64,22 +64,22 @@
   }
 }
 
-/* Media queries pour tablette */
+//tablette
 @media (max-width: 1024px) {
   .add-product-form {
-    grid-template-columns: 1fr; /* Une seule colonne sur tablette */
+    grid-template-columns: 1fr;
     
     textarea {
-      grid-column: span 1; /* Retourne à une seule colonne */
+      grid-column: span 1; 
     }
 
     button {
-      grid-column: span 1; /* Le bouton s'étend sur une seule colonne */
+      grid-column: span 1; 
     }
   }
 }
 
-/* Media queries pour ordinateur */
+//ordinateur 
 @media (min-width: 1024px) {
   .add-product-container {
     max-width: 1200px;

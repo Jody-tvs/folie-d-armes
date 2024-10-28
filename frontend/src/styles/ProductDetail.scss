@@ -30,7 +30,7 @@
 
 .carousel-container {
   width: 100%;
-  z-index: 1; /* Le carousel est en dessous du bouton */
+  z-index: 1; 
 
   img {
     width: 100%;
@@ -114,7 +114,7 @@
   }
 }
 
-// Tablette
+//tablette
 @media screen and (min-width: 768px) {
   .product-detail-container {
     flex-direction: row;
@@ -142,7 +142,7 @@
   }
 }
 
-// Ordinateur
+//ordinateur
 @media screen and (min-width: 1024px) {
   .product-detail-container {
     padding: 40px;
@@ -183,6 +183,6 @@
   .button-back {
     top: 7px;
     left: 20px;
-    z-index: 100; /* S'assurer que le bouton reste toujours au-dessus */
+    z-index: 100; 
   }
 }

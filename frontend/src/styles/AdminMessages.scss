@@ -34,19 +34,19 @@
         }
   
         &.unread {
-          background-color: #fff9e5; /* Message non lu */
+          background-color: #fff9e5;
         }
   
         &.read {
-          background-color: #e6f7d9; /* Message lu */
+          background-color: #e6f7d9; 
         }
   
-        /* Conteneur pour aligner les boutons */
+       
         .button-container {
           display: flex;
           justify-content: flex-start;
           gap: 0.5rem;
-          margin-top: auto; /* Pousse les boutons en bas */
+          margin-top: auto; 
         }
   
         button {
@@ -62,7 +62,6 @@
             background-color: #3f6138;
           }
   
-          /* Style du bouton Supprimer */
           &.delete-btn {
             background-color: #c2453c;
   
@@ -80,22 +79,21 @@
     }
   }
   
-  /* Media queries pour tablettes */
+  //tablettes 
   @media (min-width: 768px) {
     .admin-messages-container {
       ul {
         li {
           padding: 1.5rem;
-          flex-direction: row; /* Aligner les éléments en ligne */
-          justify-content: space-between; /* Créer de l'espace entre le texte et les boutons */
-          align-items: center;
+          flex-direction: row; 
+          justify-content: space-between; 
   
           p {
-            flex: 2; /* Le texte prend 2 fois plus de place que les boutons */
+            flex: 2; 
           }
   
           .button-container {
-            flex: 1; /* Les boutons prennent moins de place */
+            flex: 1; 
             justify-content: flex-end;
           }
         }
@@ -103,10 +101,10 @@
     }
   }
   
-  /* Media queries pour desktop */
+  //ordinateur 
   @media (min-width: 1024px) {
     .admin-messages-container {
-      max-width: 80%; /* Limiter la largeur du contenu */
+      max-width: 80%; 
   
       ul {
         li {
@@ -129,4 +127,3 @@
       }
     }
   }
-  

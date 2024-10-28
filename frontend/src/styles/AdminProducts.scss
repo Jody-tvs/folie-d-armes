@@ -111,9 +111,7 @@
     }
   }
   
-  /* Responsive Design */
-  
-  /* Tablette */
+  //tablette 
   @media (min-width: 768px) {
     .product-management-container {
       padding: 60px 30px;
@@ -130,7 +128,7 @@
     }
   }
   
-  /* Ordinateur */
+  //ordinateur
   @media (min-width: 1024px) {
     .product-management-container {
       padding: 80px 40px;
@@ -154,4 +152,3 @@
       }
     }
   }
-  

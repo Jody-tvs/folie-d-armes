@@ -5,7 +5,7 @@
   
     h2 {
       text-align: center;
-      font-size: 1.5rem; /* Taille ajustée pour mobile */
+      font-size: 1.5rem; 
       color: #4c6022;
       margin-bottom: 1rem;
     }
@@ -24,7 +24,7 @@
           text-align: left;
           font-size: 0.85rem;
           color: #4c6022;
-          white-space: nowrap; /* Empêche les retours à la ligne pour les titres */
+          white-space: nowrap; 
         }
       }
   
@@ -40,15 +40,14 @@
   
           td {
             padding: 0.5rem;
-            font-size: 0.8rem; /* Ajusté pour mobile */
+            font-size: 0.8rem;
             border-bottom: 1px solid #d9c9a8;
             vertical-align: middle;
-            word-wrap: break-word; /* Pour éviter que le texte déborde */
+            word-wrap: break-word; 
           }
   
-          /* Style des sélecteurs */
           select {
-            width: 100%; /* Largeur complète sur mobile */
+            width: 100%; 
             background-color: #996c38;
             color: #fff;
             border: none;
@@ -66,17 +65,16 @@
               outline: none;
             }
           }
-  
-          /* Style des boutons */
+
           button {
-            width: 100%; /* Largeur complète sur mobile */
+            width: 100%; 
             background-color: #679c5c;
             color: white;
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 0.5rem; /* Espacement entre les boutons */
+            margin-top: 0.5rem;
             transition: background-color 0.3s ease;
   
             &:hover {
@@ -84,7 +82,6 @@
             }
           }
   
-          /* Conteneur des détails de commande */
           .order-details {
             padding: 1rem;
             background-color: #f0e5bc;
@@ -113,19 +110,18 @@
     }
   }
   
-  /* Media queries pour tablettes */
+  //tablettes 
   @media (min-width: 768px) {
     .order-management-container {
       table {
         th, td {
-          font-size: 1rem; /* Ajustement pour les tablettes */
+          font-size: 1rem; 
           padding: 1rem;
         }
   
         tbody tr td {
-          /* Les boutons et sélecteurs reprennent leur taille normale */
           button, select {
-            width: auto; /* Revenir à la largeur automatique pour les plus grands écrans */
+            width: auto; 
             padding: 0.6rem 1.2rem;
           }
   
@@ -141,13 +137,13 @@
     }
   }
   
-  /* Media queries pour desktop */
+  //ordinateur
   @media (min-width: 1024px) {
     .order-management-container {
-      max-width: 80%; /* Limiter la largeur du contenu sur desktop */
+      max-width: 80%;
   
       h2 {
-        font-size: 1.8rem; /* Augmentation de la taille du titre */
+        font-size: 1.8rem; 
       }
       
       table {
@@ -157,7 +153,6 @@
         }
   
         tbody tr td {
-          /* Les boutons et sélecteurs reprennent leur taille normale sur desktop */
           button, select {
             padding: 0.7rem 1.5rem;
           }
@@ -177,4 +172,3 @@
       }
     }
   }
-  

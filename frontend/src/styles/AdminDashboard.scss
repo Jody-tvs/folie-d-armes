@@ -1,32 +1,32 @@
 .admin-dashboard-container {
-    padding: 45px 20px; /* Plus d'espace autour */
-    text-align: center; /* Ajout d'un fond gris léger */
+    padding: 45px 20px; 
+    text-align: center; 
   
     h1 {
       font-size: 2rem;
       margin-bottom: 2.5rem;
-      color: #3F6138; /* Couleur du texte principal */
+      color: #3F6138; 
     }
   
     .dashboard-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem; /* Plus d'espace entre les items */
+      gap: 1.5rem; 
       justify-content: center;
   
       .dashboard-item {
         padding: 30px 20px;
-        background-color: #f0dba8; /* Fond des cartes proche du jaune */
+        background-color: #f0dba8; 
         border: 1px solid #ddd;
-        border-radius: 15px; /* Arrondir les coins */
+        border-radius: 15px; 
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: background-color 0.3s ease, transform 0.3s ease; /* Animation fluide */
-        text-align: center; /* Centrer le texte dans les items */
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        text-align: center; 
         text-decoration: none;
   
         h2 {
           font-size: 1.8rem;
-          color: #000; /* Couleur des titres */
+          color: #000; 
           margin-bottom: 1rem;
         }
   
@@ -48,14 +48,14 @@
         }
   
         &:hover {
-          background-color: #e0c893; /* Changement de couleur au survol */
-          transform: translateY(-5px); /* Légère élévation au survol */
+          background-color: #e0c893; 
+          transform: translateY(-5px); 
         }
       }
     }
   }
   
-  /* Media queries pour tablette */
+  //tablette 
   @media (min-width: 768px) {
     .admin-dashboard-container .dashboard-grid {
       grid-template-columns: 1fr 1fr;
@@ -70,10 +70,10 @@
     }
   }
   
-  /* Media queries pour ordinateur */
+  //ordinateur 
   @media (min-width: 1024px) {
     .admin-dashboard-container .dashboard-grid {
-      grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+      grid-template-columns: repeat(2, 1fr); 
       gap: 2rem;
     }
   
@@ -85,4 +85,3 @@
       padding: 50px 30px;
     }
   }
-  

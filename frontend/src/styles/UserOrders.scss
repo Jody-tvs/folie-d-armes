@@ -9,7 +9,7 @@
       text-align: center;
       color: #333;
       margin-bottom: 20px;
-      font-size: 1.7rem; /* Légèrement plus grand */
+      font-size: 1.7rem;
     }
   
     ul {
@@ -17,14 +17,14 @@
       padding: 0;
   
       display: flex;
-      flex-direction: column; // Garder la disposition en colonne pour toutes les tailles d'écran
-      gap: 20px; // Espacement entre les commandes
+      flex-direction: column; 
+      gap: 20px; 
   
       li {
         background-color: #fff;
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); // Ombre pour la mise en avant des commandes
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
         width: 100%;
         flex: 1;
   
@@ -35,7 +35,7 @@
   
           p {
             margin: 0;
-            font-size: 1.2rem; /* Taille de police augmentée pour meilleure lisibilité */
+            font-size: 1.2rem; 
             color: #333;
           }
   
@@ -80,7 +80,7 @@
     }
   }
   
-  // Media Queries pour tablette et ordinateur
+  //tablette et ordinateur
   @media (min-width: 768px) {
     .user-orders {
       max-width: 90%;
@@ -120,4 +120,3 @@
       }
     }
   }
-  
