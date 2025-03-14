@@ -13,7 +13,7 @@ function ProductCard({ product }) {
           //boucle sur les images du produit (stockées dans un tableau) et affiche chaque image avec un texte alternatif
         ))}
       </div>
-      <h3>{product.title}</h3>
+      <h1>{product.title}</h1>
       <p>{product.description}</p>
       <p className="price">{product.price} €</p>
       <button onClick={() => alert('Ajouté au panier !')}>Ajouter au panier</button>

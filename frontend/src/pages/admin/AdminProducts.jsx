@@ -67,7 +67,7 @@ const AdminProducts = () => {
 
   return (
     <div className="product-management-container">
-      {/* Bouton de retour à la page précédente */}
+      {/* bouton de retour à la page précédente */}
         <button onClick={() => navigate(-1)} className="back-button">Retour</button> {/* bouton de retour */}
 
       <h2>Gestion des produits</h2>

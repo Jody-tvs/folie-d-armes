@@ -1,0 +1,93 @@
+.edit-product-container {
+    max-width: 800px; 
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  
+    .message {
+      font-size: 1rem;
+      color: green;
+      margin-bottom: 20px;
+    }
+  
+    .edit-product-form {
+      display: flex;
+      flex-wrap: wrap; //flex wrap pour l'empilement sur mobile 
+      gap: 20px;
+  
+      .form-column {
+        flex: 1; 
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+  
+        label {
+          font-weight: bold;
+          font-size: 1rem;
+        }
+  
+        input,
+        textarea,
+        select {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 1rem;
+        }
+      }
+  
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        align-self: flex-start; 
+  
+        &:hover {
+          background-color: #45a049;
+        }
+      }
+    }
+  }
+  
+  //tablette 
+  @media (min-width: 768px) {
+    .edit-product-container {
+      max-width: 900px;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  
+    .edit-product-form {
+      gap: 25px;
+    }
+  }
+  
+  //ordinateur 
+  @media (min-width: 1024px) {
+    .edit-product-container {
+      max-width: 1000px;
+    }
+  
+    h1 {
+      font-size: 2.5rem;
+    }
+  
+    .edit-product-form {
+      gap: 30px;
+    }
+  }

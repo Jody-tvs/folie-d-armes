@@ -1,0 +1,160 @@
+.profil-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+
+  .delete-account-btn {
+    background-color: #e0311d;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    align-self: center;
+
+    &:hover {
+      background-color: #c0392b;
+    }
+  }
+
+  .error-message {
+    color: #e74c3c;
+    margin-top: 10px;
+  }
+
+  .column {
+    background-color: $section-background-color;
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+
+    h2 {
+      background-color: $button-background-color;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: $text-color;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid $button-background-color;
+      border-radius: 5px;
+
+      &:focus {
+        border-color: $button-hover-color;
+      }
+    }
+
+    button {
+      background-color: $button-background-color;
+      color: $text-color;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #4a7a49;
+      }
+    }
+
+    .password-toggle {
+      display: flex;
+      align-items: center;
+      flex-direction: column-reverse;
+      margin-bottom: 15px;
+
+      input {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+//mobile
+@media (max-width: 767px) {
+  .profil-container {
+    flex-direction: column;
+    align-items: center;
+
+    .column {
+      width: 100%; 
+    }
+
+    .delete-account-btn {
+      width: 100%; 
+      margin-top: 20px;
+    }
+  }
+}
+
+//tablette
+@media (min-width: 768px) and (max-width: 1023px) {
+  .profil-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+
+    .column {
+      width: 48%;
+    }
+
+    .delete-account-btn {
+      width: auto;
+      margin-top: 31.9rem;
+    }
+  }
+}
+
+//ordinateur 
+@media (min-width: 1024px) {
+  .profil-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .column {
+      width: 48%;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+    }
+
+    input,
+    select {
+      font-size: 1.25rem;
+    }
+
+    button {
+      padding: 15px 30px;
+    }
+
+    .delete-account-btn {
+      width: auto;
+      margin-top: 30.6rem;
+    }
+  }
+}

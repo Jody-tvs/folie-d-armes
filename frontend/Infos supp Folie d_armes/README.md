@@ -42,20 +42,6 @@ L'ADMINISTRATEUR :
 ### Accédez au site depuis votre navigateur à l'adresse suivante :
     http://localhost:9000
 
-
-## UTILISATION
-
-- Identifiants de connexion
-
-- **ADMINISTRATEUR** : 
-  - Email : admin@gmail.com
-  - Mot de passe : Loyale460!
-
-- **UTILISATEUR** :
-  - Email : user@gmail.com
-  - Mot de passe : Loyale460!
-  
-
 **Bibliothèques utlisés**:
 
 **Communes au back et au front**:
@@ -206,22 +192,6 @@ Launch the application:
 
 Access the site from your browser at the following address:
 http://localhost:9000
-
-
-USAGE
-Login credentials:
-
-**ADMINISTRATOR** :
-
-Email: admin@gmail.com
-Password: Loyale460!
-
-
-**USER** :
-
-Email: user@gmail.com
-Password: Loyale460!
-
 
 **Libraries used**:
 

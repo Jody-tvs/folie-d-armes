@@ -1,0 +1,75 @@
+.footer {
+  background-color: #3f6138;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;  
+  margin-top: auto;
+  
+  .footer-column {
+    margin-bottom: 20px;
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #ebd49d;
+    }
+
+    p {
+      margin: 5px 0;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+
+      &:hover {
+        color: #ebd49d;
+      }
+    }
+  }
+}
+
+//tablette 
+@media (min-width: 768px) {
+  .footer {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 30px;
+    align-items: flex-start; 
+
+    .footer-column {
+      margin-bottom: 0;
+      text-align: left;
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+//ordinateur 
+@media (min-width: 1024px) {
+  .footer {
+    padding: 40px 60px;
+    align-items: flex-start;
+
+    .footer-column {
+      h3 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}

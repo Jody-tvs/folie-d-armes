@@ -9,7 +9,7 @@ function ProductCard({ product }) {
   return (
     <div className="product-card">
       {/* conteneur pour afficher la carte du produit */}
-      <h3>{product.name}</h3>
+      <h1>{product.name}</h1>
       {product.images && product.images.length > 0 ? (
           //vérifi si le produit possède des images et si leur longueur est supérieure à 0
         <Carousel>

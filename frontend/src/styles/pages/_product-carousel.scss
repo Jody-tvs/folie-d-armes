@@ -1,0 +1,47 @@
+.product-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto; 
+  background: linear-gradient(#f3e5ab, #748F66);
+
+  img {
+      width: 100%;
+      border-radius: 10px; 
+      object-fit: cover;  
+      cursor: pointer; 
+  }
+
+  .carousel-indicators {
+      display: none; 
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5); 
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      cursor: pointer;
+  }
+
+  .carousel-control-prev {
+      left: 10px;
+  }
+
+  .carousel-control-next {
+      right: 10px;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+      width: 15px;
+      height: 15px;
+  }
+}

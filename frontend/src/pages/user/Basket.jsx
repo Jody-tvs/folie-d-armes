@@ -41,7 +41,7 @@ function Basket() {
             <div key={item.id} className="basket-item">
               <img src={`http://localhost:9500/public/images/${item.picture}`} alt={item.alt} />
               <div className="details">
-                <h3>{item.name}</h3>
+                <h2>{item.name}</h2>
                 <div className="price-quantity">
                   <p className="price">Prix : {item.price} €</p>
                   <div className="quantity">
