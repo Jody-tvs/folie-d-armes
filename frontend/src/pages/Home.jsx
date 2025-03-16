@@ -15,7 +15,7 @@ function Home() {
                         <Carousel.Item key={index}>
                             <img
                                 className="d-block w-100"
-                                src={`http://localhost:9500/public/images/${image}`} 
+                                src={`https://folie-d-armes.onrender.com/public/images/${image}`} 
                                 alt={`Image ${index}`}
                             />
                         </Carousel.Item>

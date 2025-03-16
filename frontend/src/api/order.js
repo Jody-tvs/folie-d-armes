@@ -5,7 +5,7 @@ import { store } from '../store'
 export const checkPayment = async (data) => {
   try {
     const token = store.getState().auth.token //récupère le token depuis le store Redux
-    const response = await axios.post('http://localhost:9500/api/v1/order/payment', data, {
+    const response = await axios.post(`${API_URL}/order/payment`, data, {
       headers: {
         Authorization: `Bearer ${token}` //ajout du token dans l'header authorization
       }
@@ -21,7 +21,7 @@ export const checkPayment = async (data) => {
 export const updatePaymentStatus = async (data) => {
   try {
     const token = store.getState().auth.token //récupère le token depuis le store redux
-    const response = await axios.put('http://localhost:9500/api/v1/order/validate', data, {
+    const response = await axios.put(`${API_URL}/order/validate`, data, {
       headers: {
         Authorization: `Bearer ${token}` //ajout du token dans l'header authorization
       }

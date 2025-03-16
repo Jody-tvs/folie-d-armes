@@ -4,7 +4,7 @@ import Carousel from 'react-bootstrap/Carousel'
 //le composant reçoit un objet product en tant que prop contenant les informations du produit
 function ProductCard({ product }) {
   //URL du back pour accéder aux images stocker dans le répertoire public
-  const backendURL = 'http://localhost:9500/public/images/'
+  const backendURL = 'https://folie-d-armes.onrender.com/public/images/'
 
   return (
     <div className="product-card">

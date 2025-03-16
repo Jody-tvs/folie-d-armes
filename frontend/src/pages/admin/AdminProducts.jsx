@@ -15,7 +15,7 @@ const AdminProducts = () => {
     const fetchProducts = async () => {
       try {
         //appel api pour récup la liste des produits
-        const response = await axios.get('http://localhost:9500/api/v1/products')
+        const response = await axios.get('https://folie-d-armes.onrender.com/api/v1/products')
         setProducts(response.data) //on stock les produit dans l'état
         setLoading(false) //on indique que le chargement est terminer
       } catch (err) {
@@ -42,7 +42,7 @@ const AdminProducts = () => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
       try {
         //appel api pour supprimer un produit par son id
-        await axios.delete(`http://localhost:9500/api/v1/product/delete/${id}`, {
+        await axios.delete(`https://folie-d-armes.onrender.com/api/v1/product/delete/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`, //envoi du token dans le header pour l'authentification
           },

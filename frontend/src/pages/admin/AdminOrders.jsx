@@ -15,7 +15,7 @@ const AdminOrders = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem('token') //récupère le token
-        const response = await axios.get('http://localhost:9500/api/v1/order/all', {
+        const response = await axios.get('https://folie-d-armes.onrender.com/api/v1/order/all', {
           headers: {
             Authorization: `Bearer ${token}`, 
           },
@@ -62,7 +62,7 @@ const AdminOrders = () => {
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:9500/api/v1/order/update-status/${orderId}`, { status: newStatus }, {
+      await axios.put(`https://folie-d-armes.onrender.com/api/v1/order/update-status/${orderId}`, { status: newStatus }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

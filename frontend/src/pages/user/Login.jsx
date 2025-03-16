@@ -23,7 +23,7 @@ function Login() {
   
     try {
       //requête POST à l'api pour connecter l'utilisateur
-      const response = await axios.post('http://localhost:9500/api/v1/user/login', {
+      const response = await axios.post('https://folie-d-armes.onrender.com/api/v1/user/login', {
         email,
         password,
       })

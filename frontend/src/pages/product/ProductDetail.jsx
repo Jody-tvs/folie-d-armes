@@ -20,11 +20,11 @@ function ProductDetail() {
     const fetchProductDetails = async () => {
       try {
         //obtenient les détails du produit depuis l'API
-        const productResponse = await axios.get(`http://localhost:9500/api/v1/product/${id}`)
+        const productResponse = await axios.get(`https://folie-d-armes.onrender.com/api/v1/product/${id}`)
         setProduct(productResponse.data) //maj de l'état product avec les données récupérer
 
         //obtenient les images secondaires associé au produit
-        const secondaryPicturesResponse = await axios.get(`http://localhost:9500/api/secondarypictures/${id}`)
+        const secondaryPicturesResponse = await axios.get(`https://folie-d-armes.onrender.com/api/secondarypictures/${id}`)
         setSecondaryPictures(secondaryPicturesResponse.data) //maj de l'état secondaryPictures avec les images récupérer
       } catch (error) {
         //gère les erreurs en cas de problème lors de la récupération des données

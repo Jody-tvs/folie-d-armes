@@ -24,7 +24,7 @@ function Contact() {
 
         try {
             //requête POST pour envoyer les données du formulaire au serveur 
-            const response = await axios.post('http://localhost:9500/api/v1/contact', {
+            const response = await axios.post('https://folie-d-armes.onrender.com/api/v1/contact', {
                 email,
                 subject,
                 story,

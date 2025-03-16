@@ -15,7 +15,7 @@ const AdminMessages = () => {
         //récupère le token d'authentification stocké dans le localStorage pour vérifier l'authentification de l'administrateur
         const token = localStorage.getItem('token')
         //requête GET pour récupérer tous les messages depuis le back en incluant le token dans l'en-tête
-        const response = await axios.get('http://localhost:9500/api/v1/contacts', {
+        const response = await axios.get('https://folie-d-armes.onrender.com/api/v1/contacts', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -41,7 +41,7 @@ const AdminMessages = () => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce message ?')) {
       try {
         //requête DELETE pour supprimer le message avec l'id correspondant
-        await axios.delete(`http://localhost:9500/api/v1/contacts/${id}`, {
+        await axios.delete(`https://folie-d-armes.onrender.com/api/v1/contacts/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -59,7 +59,7 @@ const AdminMessages = () => {
   const handleMarkAsRead = async (id) => {
     const token = localStorage.getItem('token')
     try {
-      await axios.put(`http://localhost:9500/api/v1/contacts/${id}/read`, {}, {
+      await axios.put(`https://folie-d-armes.onrender.com/api/v1/contacts/${id}/read`, {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -81,7 +81,7 @@ const AdminMessages = () => {
   const handleMarkAsUnread = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.put(`http://localhost:9500/api/v1/contacts/${id}/unread`, {}, {
+      await axios.put(`https://folie-d-armes.onrender.com/api/v1/contacts/${id}/unread`, {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

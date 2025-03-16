@@ -26,7 +26,7 @@ const EditProduct = () => {
     const fetchProductData = async () => {
       try {
         //requête GET pour récupérer les détails du produit avec l'id donner
-        const response = await axios.get(`http://localhost:9500/api/v1/product/${id}`)
+        const response = await axios.get(`https://folie-d-armes.onrender.com/api/v1/product/${id}`)
         setProductData(response.data) //met à jour l'état avec les données du produit récupérer
       } catch (err) {
         console.error('Erreur lors de la récupération des données du produit:', err) //gère les erreurs lors de la récupération
@@ -48,7 +48,7 @@ const EditProduct = () => {
 
     try {
       //requête PUT pour mettre à jour le produit avec les nouvelles données
-      const response = await axios.put(`http://localhost:9500/api/v1/product/update/${id}`, productData, {
+      const response = await axios.put(`https://folie-d-armes.onrender.com/api/v1/product/update/${id}`, productData, {
         headers: {
           Authorization: `Bearer ${token}`, //envoie le token dans les headers pour l'authentification
         },

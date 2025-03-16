@@ -43,7 +43,7 @@ function Register() {
         }
         try {
             //envoi des données d'inscription à l'api back
-            const response = await axios.post('http://localhost:9500/api/v1/user/register', {
+            const response = await axios.post('https://folie-d-armes.onrender.com/api/v1/user/register', {
                 firstname,
                 lastname,
                 email,

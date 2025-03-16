@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel'
 import '@styles/ProductCarousel.scss'
 
 const ProductCarousel = ({ mainImage, secondaryImages, altText }) => {
-  const backendURL = 'http://localhost:9500/public/images/'
+  const backendURL = 'https://folie-d-armes.onrender.com/public/images/'
   
   return (
     <Carousel className="carousel">

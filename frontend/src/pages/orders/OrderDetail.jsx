@@ -12,7 +12,7 @@ const OrderDetail = () => {
     const fetchOrderDetail = async () => {
       try {
         const token = localStorage.getItem('token') //récupère le token d'authentification stocké dans le localStorage pour vérifier les permissions d'accès
-        const response = await axios.get(`http://localhost:9500/api/v1/order/getOneOrder/${id}`, {
+        const response = await axios.get(`https://folie-d-armes.onrender.com/api/v1/order/getOneOrder/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`, 
             //envoie le token dans l'en-tête de la requête pour s'assurer que l'utilisateur est autorisé à accéder aux détails de la commande

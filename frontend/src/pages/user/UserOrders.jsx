@@ -24,7 +24,7 @@ function UserOrders() {
 
       try {
         //Requête GET pour récupérer les commandes de l'utilisateur depuis l'api
-        const response = await axios.get(`http://localhost:9500/api/v1/order/user/${user.id}`, {
+        const response = await axios.get(`https://folie-d-armes.onrender.com/api/v1/order/user/${user.id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`, //envoi du token avec la requête
           },

@@ -25,7 +25,7 @@ function Profil() {
                 const token = localStorage.getItem('token') //récupère le token d'authentification
                 if (token) {
                     //requête GET pour récupérer les données utilisateur à partir de l'api
-                    const response = await axios.get('http://localhost:9500/api/v1/user/profil', {
+                    const response = await axios.get('https://folie-d-armes.onrender.com/api/v1/user/profil', {
                         headers: {
                             Authorization: `Bearer ${token}` //envoi du token dans les en-têtes de la requête
                         }
@@ -56,7 +56,7 @@ function Profil() {
             if (token) {
                 const updates = { [selectedField]: newValue } //crée un objet avec le champ sélectionné et la nouvelle valeur
                 //requête PUT pour mettre à jour les infos utilisateur
-                const response = await axios.put('http://localhost:9500/api/v1/user/update', updates, {
+                const response = await axios.put('https://folie-d-armes.onrender.com/api/v1/user/update', updates, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
 
@@ -94,7 +94,7 @@ function Profil() {
             const token = localStorage.getItem('token')
             if (token) {
                 //requête PUT pour mettre à jour le mdp
-                const response = await axios.put('http://localhost:9500/api/v1/user/update-password', {
+                const response = await axios.put('https://folie-d-armes.onrender.com/api/v1/user/update-password', {
                     currentPassword,
                     newPassword
                 }, {
@@ -121,7 +121,7 @@ function Profil() {
             const token = localStorage.getItem('token');
             if (token) {
                 //requête DELETE pour supprimer le compte utilisateur
-                const response = await axios.delete(`http://localhost:9500/api/v1/user/delete`, {
+                const response = await axios.delete('https://folie-d-armes.onrender.com/api/v1/user/delete', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

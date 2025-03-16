@@ -1,0 +1,1 @@
+export const API_URL = 'https://folie-d-armes.onrender.com/api/v1'

@@ -39,7 +39,7 @@ function Basket() {
           {/* si le panier n'est pas vide on affiche les articles dans le panier */}
           {basket.map((item) => (
             <div key={item.id} className="basket-item">
-              <img src={`http://localhost:9500/public/images/${item.picture}`} alt={item.alt} />
+              <img src={`https://folie-d-armes.onrender.com/public/images/${item.picture}`} alt={item.alt} />
               <div className="details">
                 <h2>{item.name}</h2>
                 <div className="price-quantity">

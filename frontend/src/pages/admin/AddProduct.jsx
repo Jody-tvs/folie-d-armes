@@ -40,7 +40,7 @@ const AddProduct = () => {
     }
 
     try {
-        const response = await axios.post('http://localhost:9500/api/v1/product/save', productData, {
+        const response = await axios.post('https://folie-d-armes.onrender.com/api/v1/product/save', productData, {
             headers: {
                 Authorization: `Bearer ${token}`, 
             }

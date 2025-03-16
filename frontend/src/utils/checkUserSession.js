@@ -8,7 +8,7 @@ const checkUserSession = async () => {
     //si un token est présent
     if (token) {
       //envoie une requête au back pour vérifier la validiter du token
-      const response = await axios.get('http://localhost:9500/api/v1/user/checkToken', {
+      const response = await axios.get('https://folie-d-armes.onrender.com/api/v1/user/checkToken', {
         headers: {
           Authorization: `Bearer ${token}` //on passe le token dans le hheader de la requête
         }

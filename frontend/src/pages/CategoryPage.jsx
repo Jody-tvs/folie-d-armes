@@ -21,7 +21,7 @@ function CategoryPage() {
     const fetchProducts = async () => {
       try {
         //requête GET pour obtenir les produits d'une catégorie spécifique depuis l'api
-        const response = await axios.get(`http://localhost:9500/api/v1/products?category=${category}`)
+        const response = await axios.get(`https://folie-d-armes.onrender.com/api/v1/products?category=${category}`)
         //maj de l'état avec les produits récupérer
         setProducts(response.data)
       } catch (error) {
