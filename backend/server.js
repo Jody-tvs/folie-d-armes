@@ -51,17 +51,6 @@ mysql.createConnection({
     app.get('/', async (req, res, next) => {
         res.json({status: 200, msg: "bienvenue sur l'API FOLIE D'ARMES!"})
     })
-
-    // ✅ Route test connexion BDD
-    app.get('/api/test-db', async (req, res) => {
-        try {
-            const [rows] = await db.query("SELECT 1 + 1 AS result")
-            res.json({ message: "Connexion BDD réussie 🎉", result: rows })
-        } catch (error) {
-            console.error(error)
-            res.status(500).json({ message: "Erreur connexion BDD ❌", error })
-        }
-    })
     
     //on défini les routes pour les utilisateurs, l'authentification, produits, commandes et contact 
     userRoutes(app, db)
